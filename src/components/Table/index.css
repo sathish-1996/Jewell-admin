@@ -1,0 +1,28 @@
+
+.table thead {
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 5px;
+    background: lightgray !important;
+    /* color: blue !important; */
+}
+.table thead th{
+  
+    background: #6f86d6 !important;
+    color: #fff !important;
+    font-family:Rockwell;
+}
+.table tbody td{
+  
+    color: rgb(116, 114, 114) !important;
+    font-family:Lucida !important;
+    border: 1px solid rgb(234, 228, 228);
+    /* background-color: rgb(201, 195, 195); */
+    font-size: 14px;
+    padding: 8px;
+}
+.icon {
+    padding-left: 25px;
+    background: url("https://static.thenounproject.com/png/101791-200.png") no-repeat left;
+    background-size: 20px;
+  }

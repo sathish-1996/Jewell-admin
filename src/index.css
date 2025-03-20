@@ -1,3 +1,9 @@
+
+
+/* @tailwind base; */
+/* @tailwind components; */
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,7 +13,214 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.new_bg {
+  background-image: url('./components/images/LoginBg.jpg') !important;  
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important;
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+.hidden md:block{
+height: 500px !important;
+}
+/* html { 
+  background: url(images/bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} */
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+
+
+.category-icon-align {
+  display: flex;
+  column-gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.jewel-view-container {
+  margin: 20px;
+  height: 530px;
+
+  overscroll-behavior: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.jewel-view-container-inner {
+  padding: 20px;
+  width: 90%;
+  /* min-height: 430px; */
+  overflow: scroll;
+  height: 500px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+
+  border-radius: 20px;
+
+}
+
+.jewel-view-container-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.jewel-view-container-inner-align {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.jewel-viewpage-header {
+  font-size: 18px;
+  font-weight: 600;
+  font-family:Cambria;
+  cursor: pointer;
+
+}
+
+.jewel-view-input-align {
+  padding: 0px 0px 0px 20px;
+}
+
+.jewel-view-button-align {
+padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 20px;
+
+
+}
+
+.table-responsive {
+  padding: 20px !important;
+}
+
+.image-circle {
+  /* border: 1px solid; */
+
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.img {
+  border: none;
+  width: 170px;
+  height: 170px;
+  border-radius: 100px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  object-fit: cover;
+}
+
+/* .bg-white {
+  margin: 20px;
+  object-fit: cover;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+} */
+
+.flex-jewel-img-inner {
+  /* border: 1px solid; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 120px;
+}
+
+.flex-jewe-container-outer{
+  display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+}
+
+
+
+.css-19bb58m {
+  padding: 0px !important;
+}
+
+.css-1wy0on6 {
+  padding: 0px !important;
+}
+.css-hlgwow {
+  padding: 0px !important;
+}
+.css-1jqq78o-placeholder {
+  grid-area: 1 / 1 / 2 / 3;
+  color: hsl(0, 0%, 50%);
+  margin-left: 12px !important;
+  /* margin-right: 2px; */
+  display: flex;
+  box-sizing: border-box;
+}
+.css-qc6sy-singleValue {
+  /* font-family: Monstserrat-SemiBold !important; */
+  font-size: 12px !important;
+}
+.form-group label{
+  margin-left: 5px;
+ 
+}
+.flex-jewe-container{
+  /* border: 1px solid; */
+  display: flex;
+  justify-content: flex-end;
+}
+.flex-jewe-container-item{
+  /* border: 1px solid; */
+  display: flex;
+  /* justify-content: flex-end; */
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+}
+.jewel-app-btn-create{
+  background-color: #667eea !important;
+  color: #fff;
+  font-family:Blippo  !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  border: #667eea !important;
+}
+.jewel-app-btn-cancel{
+  background-color: #ea667a !important;
+  color: #fff;
+  font-family:Blippo  !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  border:#ea667a !important
+}
+.hr-error-text {
+  font-family: Poppins-Medium !important;
+  font-size: 12px;
+  color: rgb(184, 22, 22);
+  margin-left: 12px;
+  display: flex;
 }

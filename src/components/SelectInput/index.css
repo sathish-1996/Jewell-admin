@@ -1,0 +1,57 @@
+.form-group label {
+    display: flex;
+    padding: 10px;
+    font-size: 14px;
+    color: rgb(95, 93, 93);
+    font-family:serif;
+    font-weight: 600;
+}
+
+.form-input {
+    width: 100%;
+    padding: 8px 8px !important;
+    /* border: 1px solid #d2d2d2; */
+    border-radius: 5px;
+    outline: none !important;
+    /* height: 15px; */
+}
+
+
+
+.jewel-option-select-container {
+    /* border: 1px solid #000; */
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: flex-start;
+    /* margin: 8px 10px; */
+}
+
+.jewel-option-select {
+    width: 100% !important;
+    outline: none !important;
+}
+
+
+.tss-1vsygk-MUIDataTableFilterList-root {
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-pack: left !important;
+    -ms-flex-pack: left !important;
+    -webkit-justify-content: left !important;
+    justify-content: left !important;
+    -webkit-box-flex-wrap: wrap !important;
+    -webkit-flex-wrap: wrap !important;
+    -ms-flex-wrap: wrap !important;
+    flex-wrap: wrap !important;
+    margin: 0px 16px 20px 0px !important;
+    column-gap: 10px !important;
+}
+
+.important-field {
+    color: red;
+    font-weight: 600;
+    margin-left: 3px;
+}
