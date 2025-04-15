@@ -11,6 +11,7 @@
     background: #6f86d6 !important;
     color: #fff !important;
     font-family:Rockwell;
+    text-align: center;
 }
 .table tbody td{
   
@@ -20,9 +21,20 @@
     /* background-color: rgb(201, 195, 195); */
     font-size: 14px;
     padding: 8px;
+    text-align: center;
 }
 .icon {
     padding-left: 25px;
     background: url("https://static.thenounproject.com/png/101791-200.png") no-repeat left;
     background-size: 20px;
+  }
+  .jewel-pagination-btn-active{
+    /* background-color: #6f86d6; */
+    color: rgb(79, 79, 249) !important;
+    border: #6f86d6;
+  }
+  .jewel-pagination-btn-inactive{
+    background-color: grey;
+    color: grey;
+    border: grey;
   }

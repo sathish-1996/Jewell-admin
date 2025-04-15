@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DataTable from '../../components/Table/table';
 import { BiSolidEdit } from 'react-icons/bi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
@@ -6,113 +6,72 @@ import { Button } from 'react-bootstrap';
 import { MdOutlineArrowBackIosNew } from 'react-icons/md';
 import CategoryFields from "../Constant/categoryfields"
 import { useNavigate } from 'react-router-dom';
+import { DELETE_ITEMS, GETALL_ITEMS } from '../../services/ApiService';
+import toast from 'react-hot-toast';
+import ItemsFileds from '../Constant/itemsfield';
 
-export const data = [
-    {
-        "id": 1,
-        "name": "Leanne Graham",
-        "category": "Gold Coin",
-        "email": "Sincere@april.biz",
-        "phone": "1-770-736-8031 x56442",
-        "country": "GCN",
-    },
-    {
-        "id": 2,
-        "name": "Ervin Howell",
-        "category": "Braclete",
-        "email": "Shanna@melissa.tv",
-        "phone": "010-692-6593 x09125",
-        "country": "BRCL",
-    },
-    {
-        "id": 3,
-        "name": "Clementine Bauch",
-        "category": "Necklace",
-        "email": "Nathan@yesenia.net",
-        "phone": "1-463-123-4447",
-        "country": "NLC",
-    },
-    {
-        "id": 4,
-        "name": "Patricia Lebsack",
-        "category": "Chain",
-        "email": "Julianne.OConner@kory.org",
-        "phone": "493-170-9623 x156",
-        "country": "CHN",
-    },
-    {
-        "id": 5,
-        "name": "Chelsey Dietrich",
-        "category": "Earings",
-        "email": "Lucio_Hettinger@annie.ca",
-        "phone": "(254)954-1289",
-        "country": "ERN",
-    },
-    {
-        "id": 6,
-        "name": "Leanne Graham",
-        "category": "Bret",
-        "email": "Sincere@april.biz",
-        "phone": "1-770-736-8031 x56442",
-        "country": "hildegard.org",
-    },
-    {
-        "id": 7,
-        "name": "Ervin Howell",
-        "category": "Antonette",
-        "email": "Shanna@melissa.tv",
-        "phone": "010-692-6593 x09125",
-        "country": "anastasia.net",
-    },
-    {
-        "id": 8,
-        "name": "Clementine Bauch",
-        "category": "Samantha",
-        "email": "Nathan@yesenia.net",
-        "phone": "1-463-123-4447",
-        "country": "ramiro.info",
-    },
-    {
-        "id": 9,
-        "name": "Patricia Lebsack",
-        "category": "Karianne",
-        "email": "Julianne.OConner@kory.org",
-        "phone": "493-170-9623 x156",
-        "country": "kale.biz",
-    },
-    {
-        "id": 10,
-        "name": "Chelsey Dietrich",
-        "category": "Kamren",
-        "email": "Lucio_Hettinger@annie.ca",
-        "phone": "(254)954-1289",
-        "country": "demarco.info",
-    },
-]
-const ViewItems = ({ viewPage }) => {
 
-   const navigate = useNavigate()
+const ViewItems = ({ func, viewPage }) => {
+    const [getAllItems, setGetAllItems] = useState([])
 
-    const updateData = {
-        title: 'Action',
-        key: 'action',
-        render: rowData => {
-            return (
-                <div className='category-icon-align'>
-                    sdsdsd
-                </div>
-            )
-        },
+    const navigate = useNavigate()
+
+
+    const getAll = async () => {
+        let response;
+        try {
+            response = await GETALL_ITEMS()
+
+            let getData = []
+            for (let index = 0; index < response.products.length; index++) {
+                const element = response.products[index];
+
+                getData.push({ ...element, SubCategoryName: element.subcategories.name })
+
+            }
+            console.log(getData, 'getAllItems')
+            setGetAllItems(getData)
+
+        } catch (error) {
+            console.log(error)
+        }
     }
+
+
+    const handleChange = (data) => {
+
+        viewPage()
+        func(data)
+    }
+    useEffect(() => {
+
+        getAll()
+    }, [])
+    const _deleteCategory = async (data) => {
+
+        let response;
+
+        try {
+            response = await DELETE_ITEMS(data.id);
+            if (response.success === true) {
+
+                toast.success(response.message);
+            } else {
+                toast.error(response.message);
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
 
     return (
         <div className='jewel-view-container'>
             <div className='jewel-view-container-inner'>
                 <div className='jewel-view-container-inner-align'>
-                    <div className='jewel-viewpage-header'> <MdOutlineArrowBackIosNew  onClick={() => navigate("/")} /> <span>List of Items</span></div>
-                    <div><Button className="primary" onClick={() => viewPage()}>Create</Button></div>
+                    <div className='jewel-viewpage-header'> <MdOutlineArrowBackIosNew onClick={() => navigate("/")} /> <span>List of Items</span></div>
+                    <div><Button className="primary" onClick={() => { viewPage(); func() }}>Create</Button></div>
                 </div>
-                <DataTable cols={React.useMemo(() => [...CategoryFields(), updateData], [])} data={data} isDark bordered striped hoverable rowsPerPage={5} />
+                <DataTable cols={React.useMemo(() => [...ItemsFileds()], [])} data={getAllItems} isDark bordered striped hoverable rowsPerPage={5} editRow={handleChange} deleteRow={_deleteCategory} />
             </div>
         </div>
     )

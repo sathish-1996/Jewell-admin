@@ -5,34 +5,26 @@ import SubCategory from "../../pages/SubCategory"
 
 
 const routes = [
-    {
-      path: "/",
-      name: "Dashboard",
-    //   exact: true,
-    
-      component: Dashboard,
-    },
-    {
-        path: "/category",
-        name: "category",
-        exact: true,
-        pageTitle: "Jewel Admin",
-        component: Category,
-      },
-      {
-        path: "/subcategory",
-        name: "subcategory",
-        exact: true,
-        pageTitle: "Jewel Admin",
-        component: SubCategory,
-      },
-      {
-        path: "/items",
-        name: "items",
-        exact: true,
-        pageTitle: "Jewel Admin",
-        component: Items,
-      }
-]
+  {
+    path: "/",
+    name: "Dashboard",
+    element: <Dashboard />, // Changed from 'component' to 'element'
+  },
+  {
+    path: "/category",
+    name: "Category",
+    element: <Category />, 
+  },
+  {
+    path: "/subcategory",
+    name: "SubCategory",
+    element: <SubCategory />, 
+  },
+  {
+    path: "/items",
+    name: "Items",
+    element: <Items />, 
+  }
+];
 
-export default routes
+export default routes;

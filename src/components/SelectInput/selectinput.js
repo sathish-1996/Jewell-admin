@@ -48,7 +48,7 @@ const SelectInputField = ({
                     width={width}
                     isDisabled={disable}
                     // className={'HR-option-select'}
-                    placeholder={placeholder ? placeholder : 'Select'}
+                    placeholder={placeholder ?  <div className="select-placeholder-text">{placeholder}</div> : <div className="select-placeholder-text">Select category</div>}
                     value={value}
                     style={{ height: OptionSelectHeight }}
                     onChange={_handleOnchange}

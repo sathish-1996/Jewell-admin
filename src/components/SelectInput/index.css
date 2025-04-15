@@ -55,3 +55,37 @@
     font-weight: 600;
     margin-left: 3px;
 }
+
+::placeholder {
+    font-style: Blippo;
+    font-size: 12px;
+  
+    padding: 5px !important;
+    content : "some other placeholder" !important;
+  }
+  select {
+    text-align: center;
+    text-align-last: center;
+    /* webkit*/
+  }
+  option {
+    text-align: left !important;
+    /* reset to left*/
+  }
+  .select-placeholder-text{
+    font-size: 13px;
+  }
+  .css-1dimb5e-singleValue {
+    grid-area: 1 / 1 / 2 / 3;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: hsl(0, 0%, 20%);
+    margin-left: 10px !important;
+    margin-right: 2px;
+    box-sizing: border-box;
+    font-size: 14px !important;
+    /* color: rgb(139, 134, 134); */
+    font-style: Blippo;
+}

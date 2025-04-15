@@ -1,11 +1,11 @@
 
 
-const SubCategoryFields = () => {
+const ItemsFileds = () => {
     return [
        
         {
             title: 'Category',
-            key: 'CategoryName',
+            key: 'SubCategoryName',
             render: rowData => {
                 return <span>{rowData.name}</span>;
             },
@@ -27,4 +27,4 @@ const SubCategoryFields = () => {
        
     ];
 };
-export default SubCategoryFields
+export default ItemsFileds

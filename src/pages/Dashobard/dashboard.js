@@ -10,10 +10,10 @@ const Dashboard = () => {
 
 
     return (
-        <div>
+        <div className='jewel-view-container'>
             <Card />
-
         </div>
+
     )
 }
 

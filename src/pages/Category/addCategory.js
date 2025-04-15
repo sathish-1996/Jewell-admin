@@ -6,8 +6,11 @@ import { FaCloudUploadAlt } from 'react-icons/fa'
 import { CREATE_CATEGORY, UPDATE_CATEGORY } from '../../services/ApiService'
 import toast from 'react-hot-toast';
 const AddCategory = ({ toEdit, createPage }) => {
+    console.log(toEdit, "name")
     const [category, setCategory] = useState({ name: "", code: "" })
-    const [image, setImage] = useState(null);
+    const [uploadIma, setUploadIma] = useState("");
+    console.log(uploadIma, "imahes")
+    const [uploadImaChange, setUploadImaChange] = useState();
     const initialState = {
         categoryName: '',
         categoryCode: '',
@@ -16,31 +19,46 @@ const AddCategory = ({ toEdit, createPage }) => {
     const [errorForm, setErrorForm] = React.useState(initialState);
 
     const [typing, setTyping] = React.useState(false);
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const imageUrl = URL.createObjectURL(file);
-            setImage(imageUrl);
-        }
-    };
+
+
+
     const handleData = (name, value) => {
         console.log(name, value, "value")
         setCategory({ ...category, [name]: value })
 
     }
+    const handleFileChange = async (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            convertToBase64(file);
+        }
+    };
 
+    const convertToBase64 = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            setUploadIma(reader.result);
+        };
+        reader.onerror = (error) => {
+            console.error(error);
+        };
+    };
     const _createCategory = async () => {
         let validate = Validate();
         let response;
+
         if (toEdit === '' && validate === true) {
 
             try {
 
                 response = await CREATE_CATEGORY({
                     ...category,
+
+                    image: uploadIma
                 });
 
-                if (response.response.success === true) {
+                if (response.success === true) {
                     createPage(response.response);
                     toast.success(response.response.message);
                 } else {
@@ -55,15 +73,16 @@ const AddCategory = ({ toEdit, createPage }) => {
             try {
                 response = await UPDATE_CATEGORY({
                     ...category,
-                    id: toEdit.id,
-                    // categoryName:selectField["categoryName"]
+                    code: category.code,
+                    image: uploadIma
+
                 });
 
-                if (response.response.success === true) {
+                if (response.success === true) {
                     createPage();
-                    toast.success(response.response.message);
+                    toast.success(response.message);
                 } else {
-                    toast.error(response.response.message);
+                    toast.error(response.message);
                 }
             } catch (error) {
                 toast.error(error.message);
@@ -73,7 +92,7 @@ const AddCategory = ({ toEdit, createPage }) => {
 
     const Validate = () => {
         let categoryName = '';
-        let  categoryCode = '';
+        let categoryCode = '';
         var regex = /^[a-zA-Z ]*$/;
         var regexNum = /^[A-Za-z0-9_ ]*$/;
 
@@ -94,7 +113,7 @@ const AddCategory = ({ toEdit, createPage }) => {
             categoryCode = '';
         }
 
-        if (categoryName !== '' ||  categoryCode !== '') {
+        if (categoryName !== '' || categoryCode !== '') {
             setErrorForm({ categoryName, categoryCode });
             setTyping(true);
             return false;
@@ -102,26 +121,38 @@ const AddCategory = ({ toEdit, createPage }) => {
         if (categoryName === '' && categoryCode === '') return true;
     };
     const _resetData = () => {
+       if(toEdit !==""){
         setCategory({
             ...category,
-            categoryName: toEdit.categoryName,
-            categoryCode: toEdit.categoryCode,
+            name: toEdit?.name,
+            code: toEdit?.code,
         });
+       }else{
+        setCategory({
+            ...category,
+            name: "",
+            code: "",
+        });
+        setUploadIma("")
         setErrorForm({ categoryName: '', categoryCode: '' });
+       }
+      
     };
     React.useEffect(() => {
+
         setCategory({
-             ...category,
-             categoryName: toEdit.categoryName,
-             categoryCode: toEdit.categoryCode,
+            ...category,
+            name: toEdit?.name,
+            code: toEdit?.code
         });
-   }, []);
+        setUploadIma(toEdit.images.url)
+    }, []);
     return (
         <div className='jewel-view-container'>
             <div className='jewel-view-container-inner'>
                 <div className='jewel-view-container-inner-align'>
                     <div className='jewel-viewpage-header' onClick={() => createPage()}>
-                        <MdOutlineArrowBackIosNew /> <span> {toEdit ? 'Edit Category' : 'Create Category'}</span>
+                        <MdOutlineArrowBackIosNew /> <span> {toEdit !== "" ? 'Edit Category' : 'Create Category'}</span>
                     </div>
 
                 </div>
@@ -149,12 +180,15 @@ const AddCategory = ({ toEdit, createPage }) => {
 
                                 <div className='flex-jewe-container-outer'>
 
-                                    <div className="flex flex-col items-center gap-4 p-4 border rounded-2xl" style={{width:"400px"}}>
+                                    <div className="flex flex-col items-center gap-4 p-4 border rounded-2xl" style={{ width: "400px" }}>
                                         <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer hover:bg-gray-100 transition">
                                             <div className='flex-jewel-img-inner'>
-                                                <input type="file" className="hidden" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} />
-                                                {image ? (
-                                                    <img src={image} alt="Uploaded" className="w-full h-full object-cover rounded-lg" width={"100%"} height={"100px"} />
+                                                <input type="file" className="hidden" accept='uploadIma/png,uploadIma/gif,uploadIma/jpeg' name="uploadIma" onChange={handleFileChange}
+
+
+                                                />
+                                                {uploadIma || toEdit ? (
+                                                    <img src={uploadIma} alt="Uploaded" className="w-full h-full object-cover rounded-lg" width={"100%"} height={"100px"} />
                                                 ) : (
                                                     <div className="flex flex-col items-center text-gray-500">
                                                         <FaCloudUploadAlt size={40} />
@@ -166,11 +200,11 @@ const AddCategory = ({ toEdit, createPage }) => {
 
                                     </div>
 
-                                    {image ?
+                                    {uploadIma ?
                                         <div style={{ margin: "20px 0px 20px 20px" }}>
-                                            <Button className="btn btn-danger" onClick={() => setImage(null)} style={{ color: "#fff" }}>Remove</Button>  </div> :
+                                            <Button className="btn btn-danger" onClick={() => setUploadIma(null)} style={{ color: "#fff" }}>Remove</Button>  </div> :
                                         <div style={{ margin: "20px 0px 20px 20px" }}>
-                                            <div >Image upload</div>  </div>
+                                            <div className='jewel-img-upload-text'>Image upload</div>  </div>
                                     }
 
                                 </div>
@@ -184,7 +218,7 @@ const AddCategory = ({ toEdit, createPage }) => {
 
                         </div>
                         <div className='col-md-5 jewel-view-button-align'>
-                            <Button className='jewel-app-btn-create' onClick={_createCategory}>Create</Button>
+                            <Button className='jewel-app-btn-create' onClick={_createCategory}>{toEdit !== "" ? 'Update' : 'Create'}</Button>
                             <Button className='jewel-app-btn-cancel' onClick={_resetData}>Cancel</Button>
                         </div>
                     </div>

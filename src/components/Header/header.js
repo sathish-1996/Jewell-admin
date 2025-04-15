@@ -1,6 +1,6 @@
 import React from 'react'
 import "./index.css"
-import images from "../../components/images/ring.png";
+import images from "../../components/images/purelogo-removebg-preview.png";
 import { Navigate, useNavigate } from 'react-router-dom'
 import { BiUser } from 'react-icons/bi';
 import { CiHeart } from 'react-icons/ci';
@@ -20,8 +20,8 @@ const Header = () => {
                         <img src={images} alt={"header"} width={"50px"} />
                     </div>
                     <div className='jewell-header-text-align'>
-                        <div className="jewell-header-icon-font-header">Dikshi</div>
-                        <div className="jewell-header-icon-font">World Famous jewellery</div>
+                        <div className="jewell-header-icon-font-header">Pure Silver </div>
+                        <div className="jewell-header-icon-font" style={{textAlign:"center"}}> World Famous jewellery</div>
                     </div>
                 </div>
                 <div className="jewell-header-icon-font-header-1">

@@ -18,13 +18,13 @@ const Menu = (props) => {
                 <Header {...props} />
                 <div className='hr_main_layout_outcon'>
                     <Routes>
-                        {routes.map(({ path, component: Component }, i) => {
+                        {routes.map(({ path, element }, i) => {
+                            console.log(path,"path")
                             return (
                                 <Route
                                     key={i}
-                                    //   exact={layout.exact}
                                     path={path}
-                                    element={<Component />} />
+                                    element={element} />
 
 
                             );

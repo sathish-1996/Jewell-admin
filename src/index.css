@@ -64,6 +64,16 @@ code {
   justify-content: center;
   align-items: center;
 }
+.jewel-view-container-dashboard{
+  margin: 20px;
+  height: 530px;
+
+  overscroll-behavior: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .jewel-view-container-inner {
   padding: 20px;
@@ -223,4 +233,11 @@ padding: 20px;
   color: rgb(184, 22, 22);
   margin-left: 12px;
   display: flex;
+}
+.jewel-img-upload-text{
+  display: flex;
+  padding: 10px;
+  margin-left: 2px;
+  font-size: 14px;
+   color: rgb(139, 134, 134);
 }

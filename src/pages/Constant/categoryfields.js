@@ -2,26 +2,20 @@
 
  const CategoryFields = () => {
     return [
-        {
-            title: 'ID',
-            key: 'id',
-            render: rowData => {
-                return <span>{rowData.id}</span>;
-            },
-        },
+       
 
         {
             title: 'Category',
-            key: 'category',
+            key: 'name',
             render: rowData => {
-                return <span>{rowData.category}</span>;
+                return <span>{rowData.name}</span>;
             },
         },
         {
             title: 'Category Code',
-            key: 'country',
+            key: 'code',
             render: rowData => {
-                return <span>{rowData.country}</span>;
+                return <span>{rowData.code}</span>;
             },  
         },
        

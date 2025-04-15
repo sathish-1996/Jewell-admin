@@ -8,7 +8,7 @@ const SubCategory = () => {
     return (
         <div>
             {view === "view" && <ViewSubCategory  func={setEditSubCategory} viewPage={() => setView("create")} />}
-            {view === "create" && <AddSubCategory toEdit={editSubCatgory} createPage={() => setView("view")} />}
+            {view === "create" && <AddSubCategory   toEdit={editSubCatgory} createPage={() => setView("view")} />}
         </div>
     )
 }
