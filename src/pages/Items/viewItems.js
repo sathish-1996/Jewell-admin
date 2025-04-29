@@ -25,7 +25,7 @@ const ViewItems = ({ func, viewPage }) => {
             let getData = []
             for (let index = 0; index < response.products.length; index++) {
                 const element = response.products[index];
-
+                
                 getData.push({ ...element, SubCategoryName: element.subcategories.name })
 
             }
@@ -69,7 +69,7 @@ const ViewItems = ({ func, viewPage }) => {
             <div className='jewel-view-container-inner'>
                 <div className='jewel-view-container-inner-align'>
                     <div className='jewel-viewpage-header'> <MdOutlineArrowBackIosNew onClick={() => navigate("/")} /> <span>List of Items</span></div>
-                    <div><Button className="primary" onClick={() => { viewPage(); func() }}>Create</Button></div>
+                    <div><Button className="primary" onClick={() => { viewPage(); func("") }}>Create</Button></div>
                 </div>
                 <DataTable cols={React.useMemo(() => [...ItemsFileds()], [])} data={getAllItems} isDark bordered striped hoverable rowsPerPage={5} editRow={handleChange} deleteRow={_deleteCategory} />
             </div>

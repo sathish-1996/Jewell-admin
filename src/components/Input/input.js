@@ -12,7 +12,7 @@ const Validation_Regex = {
     RESTRICTED3: /^[A-Z0-9_-]*$/gi,
 };
 
-const InputField = ({ value, label, placeholder, type,inputType,avoidSplChar = false, onChange, icon, name, height, width, keyname, important = false, index = '' }) => {
+const InputField = ({ value, label, placeholder, type,inputType,maxlength,avoidSplChar = false, onChange, icon, name, height, width, keyname, important = false, index = '' }) => {
     const [errorValue, setErrorValue] = React.useState(false);
 
     const _handleOnChange = (e) => {
@@ -109,6 +109,7 @@ const InputField = ({ value, label, placeholder, type,inputType,avoidSplChar = f
                     placeholder={placeholder}
                     onChange={_handleOnChange}
                     style={{ height: height }}
+                    maxlength={maxlength}
                 />
             </div>
         </div>

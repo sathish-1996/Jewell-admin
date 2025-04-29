@@ -3,13 +3,13 @@ import { Button } from 'react-bootstrap'
 import InputField from '../../components/Input/input'
 import { MdOutlineArrowBackIosNew } from 'react-icons/md'
 import { FaCloudUploadAlt } from 'react-icons/fa'
-import { CREATE_CATEGORY, UPDATE_CATEGORY } from '../../services/ApiService'
+import { CREATE_CATEGORY, UPDATE_CATEGORY, UPDATE_CATEGORY_IMAGE } from '../../services/ApiService'
 import toast from 'react-hot-toast';
 const AddCategory = ({ toEdit, createPage }) => {
-    console.log(toEdit, "name")
+
     const [category, setCategory] = useState({ name: "", code: "" })
     const [uploadIma, setUploadIma] = useState("");
-    console.log(uploadIma, "imahes")
+    console.log(uploadIma, category, 'uploadIma')
     const [uploadImaChange, setUploadImaChange] = useState();
     const initialState = {
         categoryName: '',
@@ -47,6 +47,7 @@ const AddCategory = ({ toEdit, createPage }) => {
     const _createCategory = async () => {
         let validate = Validate();
         let response;
+        const imageChanged = uploadIma && uploadIma !== toEdit?.images?.url;
 
         if (toEdit === '' && validate === true) {
 
@@ -55,7 +56,7 @@ const AddCategory = ({ toEdit, createPage }) => {
                 response = await CREATE_CATEGORY({
                     ...category,
 
-                    image: uploadIma
+
                 });
 
                 if (response.success === true) {
@@ -68,13 +69,32 @@ const AddCategory = ({ toEdit, createPage }) => {
             } catch (error) {
                 toast.error(error.message);
             }
-        } else if (toEdit !== '' && validate === true) {
+        } else if (imageChanged) {
+
+            try {
+                response = await UPDATE_CATEGORY_IMAGE({
+                    by: "category",
+                    id: toEdit.id,
+                    image: uploadIma
+
+                });
+
+                if (response.success === true) {
+                    createPage();
+                    toast.success(response.message);
+                } else {
+                    toast.error(response.message);
+                }
+            } catch (error) {
+                toast.error(error.message);
+            }
+        } else {
 
             try {
                 response = await UPDATE_CATEGORY({
                     ...category,
                     code: category.code,
-                    image: uploadIma
+                    // image: uploadIma
 
                 });
 
@@ -121,22 +141,22 @@ const AddCategory = ({ toEdit, createPage }) => {
         if (categoryName === '' && categoryCode === '') return true;
     };
     const _resetData = () => {
-       if(toEdit !==""){
-        setCategory({
-            ...category,
-            name: toEdit?.name,
-            code: toEdit?.code,
-        });
-       }else{
-        setCategory({
-            ...category,
-            name: "",
-            code: "",
-        });
-        setUploadIma("")
-        setErrorForm({ categoryName: '', categoryCode: '' });
-       }
-      
+        if (toEdit !== "") {
+            setCategory({
+                ...category,
+                name: toEdit?.name,
+                code: toEdit?.code,
+            });
+        } else {
+            setCategory({
+                ...category,
+                name: "",
+                code: "",
+            });
+            setUploadIma("")
+            setErrorForm({ categoryName: '', categoryCode: '' });
+        }
+
     };
     React.useEffect(() => {
 
@@ -145,7 +165,7 @@ const AddCategory = ({ toEdit, createPage }) => {
             name: toEdit?.name,
             code: toEdit?.code
         });
-        setUploadIma(toEdit.images.url)
+        setUploadIma(toEdit?.images?.url)
     }, []);
     return (
         <div className='jewel-view-container'>
@@ -158,12 +178,12 @@ const AddCategory = ({ toEdit, createPage }) => {
                 </div>
                 <div className='jewel-view-input-align'>
                     <div className='row'>
-                        <div className='col-md-5'>
+                        <div className='col-12 col-md-5 mb-3'>
 
                             <InputField value={category['name']} name={'Catgory Name'} important={true} inputType={"string"} label={"Category Name"} placeholder={"Enter the Name"} keyname={'name'} onChange={handleData} />
                             {typing ? <div className='hr-error-text'>{errorForm.categoryName}</div> : null}
                         </div>
-                        <div className='col-md-5'>
+                        <div className='col-12 col-md-5 mb-3'>
 
                             <InputField inputType={"string"} value={category['code']} important={true} keyname={'code'} label={"Category Code"} placeholder={"Enter the Code"} onChange={handleData} />
                             {typing ? <div className='hr-error-text'>{errorForm.categoryCode}</div> : null}
@@ -174,37 +194,37 @@ const AddCategory = ({ toEdit, createPage }) => {
                         <div className='col-md-5'>
 
                         </div>
+                        <div className='col-12 col-md-7'>
+                            <div style={{ maxWidth: "100%", width: "100%" }}>
+                                <div className='flex-jewe-container-item'>
 
-                        <div style={{ height: "260px", width: "500px", marginLeft: "20px" }}>
-                            <div className='flex-jewe-container-item'>
+                                    <div className='flex-jewe-container-outer'>
 
-                                <div className='flex-jewe-container-outer'>
-
-                                    <div className="flex flex-col items-center gap-4 p-4 border rounded-2xl" style={{ width: "400px" }}>
-                                        <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer hover:bg-gray-100 transition">
-                                            <div className='flex-jewel-img-inner'>
-                                                <input type="file" className="hidden" accept='uploadIma/png,uploadIma/gif,uploadIma/jpeg' name="uploadIma" onChange={handleFileChange}
+                                        <div className="flex flex-col items-center gap-4 p-4 border rounded-2xl" style={{ width: "400px" }}>
+                                            <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer hover:bg-gray-100 transition">
+                                                <div className='flex-jewel-img-inner'>
+                                                    <input type="file" className="hidden" accept='uploadIma/png,uploadIma/gif,uploadIma/jpeg' name="uploadIma" onChange={handleFileChange}
 
 
-                                                />
-                                                {uploadIma || toEdit ? (
-                                                    <img src={uploadIma} alt="Uploaded" className="w-full h-full object-cover rounded-lg" width={"100%"} height={"100px"} />
-                                                ) : (
-                                                    <div className="flex flex-col items-center text-gray-500">
-                                                        <FaCloudUploadAlt size={40} />
-                                                        <span className="text-sm" style={{ marginLeft: "10px" }}>upload</span>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </label>
+                                                    />
+                                                    {uploadIma || toEdit ? (
+                                                        <img src={uploadIma} alt="Uploaded" className="w-full h-full object-cover rounded-lg" style={{ maxHeight: "200px", objectFit: "cover" }} />
+                                                    ) : (
+                                                        <div className="flex flex-col items-center text-gray-500">
+                                                            <FaCloudUploadAlt size={40} />
+                                                            <span className="text-sm" style={{ marginLeft: "10px" }}>upload</span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </label>
 
+                                        </div>
                                     </div>
-
                                     {uploadIma ?
                                         <div style={{ margin: "20px 0px 20px 20px" }}>
                                             <Button className="btn btn-danger" onClick={() => setUploadIma(null)} style={{ color: "#fff" }}>Remove</Button>  </div> :
                                         <div style={{ margin: "20px 0px 20px 20px" }}>
-                                            <div className='jewel-img-upload-text'>Image upload</div>  </div>
+                                            <div className='jewel-img-upload-text'></div>  </div>
                                     }
 
                                 </div>
@@ -217,7 +237,7 @@ const AddCategory = ({ toEdit, createPage }) => {
                         <div className='col-md-5 jewel-view-button-col-align'>
 
                         </div>
-                        <div className='col-md-5 jewel-view-button-align'>
+                        <div className='col-md-5 d-flex flex-column flex-md-row gap-2 jewel-view-button-align'>
                             <Button className='jewel-app-btn-create' onClick={_createCategory}>{toEdit !== "" ? 'Update' : 'Create'}</Button>
                             <Button className='jewel-app-btn-cancel' onClick={_resetData}>Cancel</Button>
                         </div>

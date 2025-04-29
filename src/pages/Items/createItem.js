@@ -1,20 +1,25 @@
 import React, { useState } from 'react'
 import { Button, ButtonGroup } from 'react-bootstrap'
 import InputField from '../../components/Input/input'
-import { MdOutlineArrowBackIosNew } from 'react-icons/md'
+import { MdOutlineArrowBackIosNew, MdOutlineEditLocationAlt } from 'react-icons/md'
 import SelectInputField from '../../components/SelectInput/selectinput'
 import { FaCloudUploadAlt } from 'react-icons/fa'
-import { CREATE_ITEMS, GETALL_SUBCATEGORY, UPDATE_ITEMS } from '../../services/ApiService'
+import { CREATE_ITEMS, GETALL_SUBCATEGORY, UPDATE_ITEM_IMAGE, UPDATE_ITEMS } from '../../services/ApiService'
 import toast from 'react-hot-toast'
+import Slider from 'react-slick'
 
 const AddItems = ({ toEdit, createPage }) => {
-    console.log(toEdit,"edd")
+
     const [selectField, setSelectField] = React.useState({
         subCategoryName: '',
         purtiy: ''
     });
     const [uploadIma, setUploadIma] = useState([]);
-  
+    console.log(uploadIma, "edit")
+    const [editImage, setEditimage] = useState("")
+    const [addNewData, setNewData] = useState(true)
+    console.log(editImage, addNewData, "idnsnansn")
+    const [type, setType] = useState("")
     const [typing, setTyping] = React.useState(false);
 
     const [selectdata, setSelectData] = React.useState({
@@ -74,25 +79,13 @@ const AddItems = ({ toEdit, createPage }) => {
     };
 
     const [errorForm, setErrorForm] = React.useState(initialState);
-    const handleFileChange = async (e) => {
-        const files = Array.from(e.target.files);
-        const base64Promises = files.map(file => convertToBase64(file));
 
-        const base64Results = await Promise.all(base64Promises);
-        setUploadIma(base64Results);
-    };
 
-    const convertToBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
-        });
-    };
+
     const _createItems = async () => {
 
         let validate = Validate();
+        const imageChanged = uploadIma && uploadIma !== toEdit?.images?.url;
         let response;
         if (toEdit === '' && validate === true) {
 
@@ -115,7 +108,29 @@ const AddItems = ({ toEdit, createPage }) => {
             } catch (error) {
                 toast.error(error.message);
             }
-        } else if (toEdit !== '' && validate === true) {
+        } else if (imageChanged) {
+
+            try {
+                response = await UPDATE_ITEM_IMAGE({
+                    by: "products",
+                    id: toEdit?.id,
+                    no: editImage !== "" ? editImage + 1 : toEdit.imagesUrls.length + 1,
+                    image: editImage !== "" ? uploadIma[editImage] : uploadIma[0],
+                    type: type !== "" ? "add" : ""
+
+
+                });
+
+                if (response.success === true) {
+                    createPage();
+                    toast.success(response.message);
+                } else {
+                    toast.error(response.message);
+                }
+            } catch (error) {
+                toast.error(error.message);
+            }
+        } else {
 
             try {
                 response = await UPDATE_ITEMS({
@@ -136,7 +151,50 @@ const AddItems = ({ toEdit, createPage }) => {
             }
         }
     };
+    const handleFileChange = async (e) => {
+        console.log("zero 1 12 3 33")
+        if (!e?.target?.files?.[0]) {
+            console.error("No file selected");
+            return;
 
+        }
+
+        const file = e.target.files[0];
+
+        if (editImage !== "" && editImage !== null && editImage !== undefined && addNewData) {
+            // Editing an existing image
+            console.log(file, "filesss")
+            const base64 = await convertToBase64(file);
+            setUploadIma((prevImages) =>
+                prevImages.map((img, idx) =>
+
+                    idx === editImage ? base64 : img
+                )
+            );
+        } else if (editImage !== "" && !addNewData) {
+            // Adding new image(s)
+            console.log("mskdsdm")
+            const base64 = await convertToBase64(file);
+            setUploadIma(prev => [...prev, base64]); // <-- Keep existing
+            setNewData(true);
+        } else {
+
+            // Uploading new images
+            const files = Array.from(e.target.files);
+            const base64Promises = files.map(file => convertToBase64(file));
+            const base64Results = await Promise.all(base64Promises);
+            setUploadIma(base64Results);
+            setNewData(true)
+        }
+    };
+    const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+        });
+    };
     const Validate = () => {
 
         let subCategoryName = '';
@@ -178,19 +236,18 @@ const AddItems = ({ toEdit, createPage }) => {
     };
 
     const _resetData = () => {
-        alert("smdmsk")
-        console.log("edit zone")
-        if (toEdit !== '' ) {
-            console.log("edit zone1")
+
+        if (toEdit !== '') {
+
             setSelectData({
                 ...selectdata,
-             
+
                 name: toEdit?.name,
                 code: toEdit?.code,
-                model_name:toEdit?.model_name,
+                model_name: toEdit?.model_name,
                 size: toEdit?.size,
                 weight: toEdit?.weight,
-                stock: toEdit?.stock,   
+                stock: toEdit?.stock,
                 rate: toEdit?.rate,
                 purity: toEdit?.purity,
                 description: toEdit?.description,
@@ -206,10 +263,10 @@ const AddItems = ({ toEdit, createPage }) => {
             });
             setUploadIma(toEdit?.imagesUrls)
         } else {
-            console.log("edit zone2")
+
             setSelectData({
                 ...selectdata,
-             
+
                 name: '',
                 code: '',
                 model_name: '',
@@ -224,7 +281,7 @@ const AddItems = ({ toEdit, createPage }) => {
                 ...selectField,
                 subCategoryName: '',
                 purity: '',
-             
+
             });
             setErrorForm({
                 subCategoryName: '',
@@ -282,12 +339,19 @@ const AddItems = ({ toEdit, createPage }) => {
                 subCategoryName: { label: toEdit?.subcategories?.name },
             });
 
-            setUploadIma(toEdit?.image?.url)
+            setUploadIma(toEdit?.imagesUrls)
 
         }
     }, []);
 
     const purtiyType = [{ label: "18K", value: "purity" }, { label: "22K", value: "purity" }, { label: "24K", value: "purity" }]
+    var settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+    };
     return (
         <div className='jewel-view-container'>
             <div className='jewel-view-container-inner'>
@@ -357,57 +421,72 @@ const AddItems = ({ toEdit, createPage }) => {
 
                             <InputField value={selectdata['description']} keyname={"description"} inputType={"string"} label={"Description"} name={"Description"} onChange={_selectInput} height={"90px"} />
                         </div>
+
                         <div className='col-md-4'>
-
                             <div className='flex-jewe-container-item' style={{ padding: "0px" }}>
-
                                 <div className='flex-jewe-container-outer'>
-
                                     <div className="flex flex-col items-center p-4 border rounded-2xl" style={{ width: "400px" }}>
-                                        <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer hover:bg-gray-100 transition">
-                                            <div className='flex-jewel-img-inner'>
-                                                <input type="file" multiple  className="hidden" accept='uploadIma/png,uploadIma/gif,uploadIma/jpeg' name="uploadIma" onChange={handleFileChange}
+                                        <label className="flex flex-col justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer hover:bg-gray-100 transition">
+                                            <div >
+                                                <input
+                                                    type="file"
+                                                    multiple
+                                                    accept='image/png,image/gif,image/jpeg'
+                                                    name="uploadIma"
+                                                    onChange={(e) => handleFileChange(e, toEdit !== "" ? toEdit : "")}
+                                                    style={{ display: "none" }}
+                                                />
 
-
-                                                    style={{ display: "none" }} />
-                                                {uploadIma || toEdit ? (
-                                                     uploadIma?.map((base64, index) => (
-                                                        <img
-                                                          key={index}
-                                                          src={base64}   alt={`base64-preview-${index}`} className="w-24 h-24 object-cover border rounded" width={"100%"} height={"100px"} />))
+                                                {uploadIma.length > 0 ? (
+                                                    <Slider dots={true} infinite={false} speed={500} slidesToShow={3} slidesToScroll={3}>
+                                                        {uploadIma.map((base64, index) => (
+                                                            <div key={index} className="flex flex-col items-center">
+                                                                <img
+                                                                    src={base64}
+                                                                    alt={`base64-preview-${index}`}
+                                                                    className="w-24 h-24 object-cover border rounded"
+                                                                />
+                                                                {toEdit !== "" && (
+                                                                    <div onClick={() => setEditimage(index)} className='flex flex-col justify-center items-center'>
+                                                                        <MdOutlineEditLocationAlt size={20} />
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        ))}
+                                                    </Slider>
                                                 ) : (
                                                     <div className="flex flex-col items-center text-gray-500">
                                                         <FaCloudUploadAlt size={40} />
-                                                        <span className="text-sm" style={{ marginLeft: "10px" }}>upload</span>
+                                                        <span className="text-sm" style={{ marginLeft: "10px" }}>Upload</span>
                                                     </div>
                                                 )}
                                             </div>
                                         </label>
-
                                     </div>
 
-                                    {uploadIma?.length > 0  ?
-                                        <div >
-                                            <Button className="btn btn-danger" onClick={() => setUploadIma('')} style={{ color: "#fff" }}>Remove</Button>  </div> :
-                                        <div style={{ margin: "20px 0px 20px 20px" }}>
-                                            <div className='jewel-img-upload-text'>Image upload</div>  </div>
-                                    }
-
+                                    {toEdit === "" && uploadIma.length > 0 ? (
+                                        <div>
+                                            <Button className="btn btn-danger" onClick={() => { setUploadIma([]); setNewData(false); }} style={{ color: "#fff" }}>
+                                                Remove
+                                            </Button>
+                                        </div>
+                                    ) : (
+                                        <div><div className='jewel-img-upload-text'></div></div>
+                                    )}
                                 </div>
-
-
                             </div>
                         </div>
-                 
+
 
 
                     </div>
+
 
                     <div className='row'>
                         <div className='col-md-6'>
 
                         </div>
-                        <div className='col-md-6 jewel-view-button-align' style={{ paddingRight: "20px 20px" }}>
+                        <div className='col-md-6 jewel-view-button-align'>
                             <Button className='btn btn-primary' style={{ backgroundColor: "#6f86d6" }} onClick={_createItems}>Create</Button>
                             <Button className='btn btn-danger' onClick={_resetData}>Cancel</Button>
                         </div>
