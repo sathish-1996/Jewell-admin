@@ -194,9 +194,9 @@ const AddCategory = ({ toEdit, createPage }) => {
                         <div className='col-md-5'>
 
                         </div>
-                        <div className='col-12 col-md-7'>
+                        <div className='col-12 col-md-6'>
                             <div style={{ maxWidth: "100%", width: "100%" }}>
-                                <div className='flex-jewe-container-item'>
+                                <div className='flex-jewe-container-item' style={{flexDirection:"column"}}>
 
                                     <div className='flex-jewe-container-outer'>
 
@@ -221,9 +221,9 @@ const AddCategory = ({ toEdit, createPage }) => {
                                         </div>
                                     </div>
                                     {uploadIma ?
-                                        <div style={{ margin: "20px 0px 20px 20px" }}>
+                                        <div >
                                             <Button className="btn btn-danger" onClick={() => setUploadIma(null)} style={{ color: "#fff" }}>Remove</Button>  </div> :
-                                        <div style={{ margin: "20px 0px 20px 20px" }}>
+                                        <div >
                                             <div className='jewel-img-upload-text'></div>  </div>
                                     }
 

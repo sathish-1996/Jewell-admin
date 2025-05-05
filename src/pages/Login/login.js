@@ -43,7 +43,7 @@ const Login = () => {
     e.preventDefault();
     // Handle form submission
 
-    navigate('/dashboard');
+    navigate('/');
   };
 
   return (
