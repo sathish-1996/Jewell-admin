@@ -26,7 +26,7 @@ function App() {
         {/* <Header /> */}
         <Routes>
           {/* Public Routes */}
-          <Route path="/login" element={<OTPLogin />} />
+          <Route path="/login" element={<Login />} />
 
           {/* Dashboard & Main Layout Routes */}
           <Route path="/" element={<Layout />}>

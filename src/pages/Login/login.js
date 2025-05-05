@@ -43,7 +43,7 @@ const Login = () => {
     e.preventDefault();
     // Handle form submission
 
-    navigate('/');
+    navigate('/dashboard');
   };
 
   return (
@@ -121,6 +121,7 @@ const Login = () => {
               <button
               style={{border:"blue"}}
                 type="submit"
+                
                 className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600"
               >
                 Sign In
