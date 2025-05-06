@@ -12,7 +12,7 @@
             },
         },
         {
-            title: 'Category Code',
+            title: 'Code',
             key: 'code',
             render: rowData => {
                 return <span>{rowData.code}</span>;

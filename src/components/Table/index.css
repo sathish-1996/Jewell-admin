@@ -1,40 +1,47 @@
-
 .table thead {
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 5px;
-    background: lightgray !important;
-    /* color: blue !important; */
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 5px;
+  background: lightgray !important;
+  /* color: blue !important; */
 }
-.table thead th{
-  
-    background: #6f86d6 !important;
-    color: #fff !important;
-    font-family:Rockwell;
-    text-align: center;
+
+.table thead th {
+
+  background: #112569 !important;
+  color: #fff !important;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
 }
-.table tbody td{
-  
-    color: rgb(116, 114, 114) !important;
-    font-family:Lucida !important;
-    border: 1px solid rgb(234, 228, 228);
-    /* background-color: rgb(201, 195, 195); */
-    font-size: 14px;
-    padding: 8px;
-    text-align: center;
+
+.table tbody td {
+
+  color: rgb(14, 14, 14) !important;
+  font-family: 'Poppins', sans-serif !important;
+  border: 1px solid rgb(234, 228, 228);
+  /* background-color: rgb(201, 195, 195); */
+  font-size: 14px;
+  padding: 8px;
+  text-align: center;
+  /* font-weight: 500; */
 }
+
 .icon {
-    padding-left: 25px;
-    background: url("https://static.thenounproject.com/png/101791-200.png") no-repeat left;
-    background-size: 20px;
-  }
-  .jewel-pagination-btn-active{
-    /* background-color: #6f86d6; */
-    color: rgb(79, 79, 249) !important;
-    border: #6f86d6;
-  }
-  .jewel-pagination-btn-inactive{
-    background-color: grey;
-    color: grey;
-    border: grey;
-  }
+  padding-left: 25px;
+  background: url("https://static.thenounproject.com/png/101791-200.png") no-repeat left;
+  background-size: 20px;
+}
+
+.jewel-pagination-btn-active {
+  /* background-color: #6f86d6; */
+  color: #112569 !important ;
+  border: #6f86d6;
+}
+
+.jewel-pagination-btn-inactive {
+  background-color: grey;
+  color: grey;
+  border: grey;
+}

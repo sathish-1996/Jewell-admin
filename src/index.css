@@ -10,10 +10,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-body, html {
+
+body,
+html {
   height: 100%;
   overflow: hidden;
 }
+
 .new_bg {
   background-image: url('./components/images/LoginBg.jpg') !important;
   -webkit-background-size: cover !important;
@@ -57,28 +60,37 @@ code {
   align-items: center;
 }
 
-.jewel-view-container {
-  margin: 20px;
-  height: 530px;
-
-  overscroll-behavior: hidden;
-
+.jewel-view-container-header {
+  margin: 40px;
+  height: auto;
+  /* overscroll-behavior:initial; */
   display: flex;
   justify-content: center;
   align-items: center;
+  /* overflow: scroll; */
+}
+
+.jewel-view-container {
+  /* margin: 40px; */
+  padding: 20px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
 }
 
 .jewel-view-container-inner {
   padding: 20px;
-  width: 90%;
+  width: 95%;
   /* min-height: 430px; */
   overflow: scroll;
   height: 500px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-
-  border-radius: 20px;
+  border-radius: 10px;
 
 }
+
 .jewel-view-container-dashboard {
   margin: 20px;
   height: 530px;
@@ -102,9 +114,9 @@ code {
 }
 
 .jewel-viewpage-header {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  font-family: Cambria;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
 
 }
@@ -224,18 +236,20 @@ code {
 }
 
 .jewel-app-btn-create {
-  background-color: #667eea !important;
+  background-color: #102580 !important;
   color: #fff;
-  font-family: Blippo !important;
+  font-family: 'Poppins', sans-serif !important;
   font-weight: 600 !important;
-  font-size: 14px !important;
-  border: #667eea !important;
+  font-size: 20px !important;
+  border: #15287c !important;
+  /* width: 100%; */
+  height: 30px;
 }
 
 .jewel-app-btn-cancel {
   background-color: #ea667a !important;
   color: #fff;
-  font-family: Blippo !important;
+  font-family: 'Poppins', sans-serif !important;
   font-weight: 600 !important;
   font-size: 14px !important;
   border: #ea667a !important
@@ -264,6 +278,7 @@ code {
   margin-left: 120px;
   font-size: 14px !important;
 }
+
 .btn-primary {
   font-size: 12px !important;
   margin-left: 20px;
@@ -273,6 +288,7 @@ code {
   .jewel-view-container-inner {
     padding: 10px;
   }
+
   .jewel-view-button-align {
     flex-direction: column !important;
     align-items: stretch !important;

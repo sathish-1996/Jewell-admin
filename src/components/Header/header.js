@@ -31,13 +31,13 @@ const Header = () => {
                         <img src={images} alt={"header"} width={"50px"} />
                     </div>
                     <div className='jewell-header-text-align'>
-                        <div className="jewell-header-icon-font-header">Pure Silver </div>
-                        <div className="jewell-header-icon-font" style={{ textAlign: "center" }}> World Famous jewellery</div>
+                        <div className="jewell-header-icon-font-header">Pure Silver India</div>
+                        <div className="jewell-header-icon-font" style={{ textAlign: "center" }}> World to famous Jewellery</div>
                     </div>
-                </div>
+                </div>  
                 <div className="jewell-header-icon-font-header-1">
                     {/* <input  type='text' /> */}
-                    Welcome to admin dashboard
+                    Welcome to Admin Dashboard
                 </div>
                 <div className="jewell-header-outer-icon">
 
@@ -65,17 +65,7 @@ const Header = () => {
                               </div>
                             )}
                         </div>
-
-                        {/* {items.map((x, index) => (
-            <div className="jewell-header-cart-icon">
-              {index + 1}
-            </div>  
-          ))} */}
-
-
                     </div>
-
-                    {/* <FiMenu size={30} color="#fff" /> */}
                 </div>
             </div>
 

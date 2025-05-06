@@ -357,7 +357,7 @@ const AddItems = ({ toEdit, createPage }) => {
             <div className='jewel-view-container-inner'>
                 <div className='jewel-view-container-inner-align'>
                     <div className='jewel-viewpage-header' onClick={() => createPage()}>
-                        <MdOutlineArrowBackIosNew /> <span> Create Items</span>
+                        <MdOutlineArrowBackIosNew color='red'/> <span> Create Items</span>
                     </div>
 
                 </div>
@@ -448,7 +448,7 @@ const AddItems = ({ toEdit, createPage }) => {
                                                                 />
                                                                 {toEdit !== "" && (
                                                                     <div onClick={() => setEditimage(index)} className='flex flex-col justify-center items-center'>
-                                                                        <MdOutlineEditLocationAlt size={20} />
+                                                                        <MdOutlineEditLocationAlt  size={20} />
                                                                     </div>
                                                                 )}
                                                             </div>
@@ -487,7 +487,7 @@ const AddItems = ({ toEdit, createPage }) => {
 
                         </div>
                         <div className='col-md-6 jewel-view-button-align'>
-                            <Button className='btn btn-primary' style={{ backgroundColor: "#6f86d6" }} onClick={_createItems}>Create</Button>
+                            <Button className='jewel-app-btn-create' style={{ backgroundColor: "#6f86d6" }} onClick={_createItems}>Create</Button>
                             <Button className='btn btn-danger' onClick={_resetData}>Cancel</Button>
                         </div>
                     </div>

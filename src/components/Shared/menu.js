@@ -32,7 +32,7 @@ const Menu = (props) => {
                     </Routes>
                 </div>
 
-                <Footer />
+                {/* <Footer /> */}
             </div>
 
         </React.Fragment>

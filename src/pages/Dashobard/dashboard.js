@@ -10,7 +10,7 @@ const Dashboard = () => {
 
 
     return (
-        <div className='jewel-view-container'>
+        <div className='jewel-view-container-header'>
             <Card />
         </div>
 
