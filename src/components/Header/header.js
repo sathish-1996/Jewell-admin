@@ -32,7 +32,7 @@ const Header = () => {
                     </div>
                     <div className='jewell-header-text-align'>
                         <div className="jewell-header-icon-font-header">Pure Silver India</div>
-                        <div className="jewell-header-icon-font" style={{ textAlign: "center" }}> World to famous Jewellery</div>
+                        <div className="jewell-header-icon-font" style={{ textAlign: "center" }}> World famous Jewellery</div>
                     </div>
                 </div>  
                 <div className="jewell-header-icon-font-header-1">
