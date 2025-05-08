@@ -2,23 +2,29 @@
 
 const ItemsFileds = () => {
     return [
-       
+        // {
+        //     title: 'Category',
+        //     key: 'categories',
+        //     render: rowData => {
+        //         return <span>{rowData.name}</span>;
+        //     },
+        // },
         {
-            title: 'Category',
+            title: 'Sub-Category',
             key: 'SubCategoryName',
             render: rowData => {
                 return <span>{rowData.name}</span>;
             },
         },
         {
-            title: 'Sub Category',
+            title: 'Item Name',
             key: 'name',
             render: rowData => {
                 return <span>{rowData.name}</span>;
             },
         },
         {
-            title: 'SubCategory Code',
+            title: 'Code',
             key: 'code',
             render: rowData => {
                 return <span>{rowData.code}</span>;

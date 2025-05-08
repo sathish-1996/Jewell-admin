@@ -4,21 +4,21 @@ const SubCategoryFields = () => {
     return [
        
         {
-            title: 'Category',
+            title: 'Category Name',
             key: 'CategoryName',
             render: rowData => {
                 return <span>{rowData.name}</span>;
             },
         },
         {
-            title: 'Sub Category',
+            title: 'Sub-Category',
             key: 'name',
             render: rowData => {
                 return <span>{rowData.name}</span>;
             },
         },
         {
-            title: 'SubCategory Code',
+            title: 'Code',
             key: 'code',
             render: rowData => {
                 return <span>{rowData.code}</span>;

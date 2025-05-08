@@ -2,7 +2,7 @@
     display: flex;
     padding: 10px;
     font-size: 14px;
-    color: rgb(95, 93, 93);
+    color: rgb(0, 0, 0);
     font-family:serif;
     font-weight: 600;
 }
@@ -72,8 +72,9 @@
     text-align: left !important;
     /* reset to left*/
   }
-  .select-placeholder-text{
+  .select-placeholder-text{ 
     font-size: 13px;
+    font-family: 'Poppins', sans-serif !important;
   }
   .css-1dimb5e-singleValue {
     grid-area: 1 / 1 / 2 / 3;

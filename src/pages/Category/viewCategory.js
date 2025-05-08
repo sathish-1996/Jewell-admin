@@ -12,8 +12,8 @@ import toast from 'react-hot-toast';
 
 const ViewCategory = ({ viewPage, func }) => {
     const [getAllCategory, setGetAllCategory] = useState([])
-    
-    
+
+
 
     console.log(getAllCategory, "catsjssj")
 
@@ -23,7 +23,7 @@ const ViewCategory = ({ viewPage, func }) => {
         try {
             response = await GETALL_CATEGORY()
             setGetAllCategory(response.categories)
-          
+
         } catch (error) {
             console.log(error)
         }
@@ -34,35 +34,36 @@ const ViewCategory = ({ viewPage, func }) => {
     }, [])
 
     const handleChange = (data) => {
-       
+
         viewPage()
         func(data)
     }
 
     const _deleteCategory = async (code) => {
-         
+
         let response;
 
         try {
-             response = await DELETE_CATEGORY(code);
-             if (response.success === true) {
-                  
-                  toast.success(response.message);
-             } else {
-                  toast.error(response.message);
-             }
+            response = await DELETE_CATEGORY(code);
+            if (response.success === true) {
+
+                toast.success(response.message);
+            } else {
+                toast.error(response.message);
+            }
         } catch (error) {
-             toast.error(error.message);
+            toast.error(error.message);
         }
-   };
+    };
     return (
         <div className='jewel-view-container'>
             <div className='jewel-view-container-inner'>
                 <div className='jewel-view-container-inner-align'>
-                    <div className='jewel-viewpage-header'> <MdOutlineArrowBackIosNew onClick={() => navigate("/")} /> <span>List of Category</span></div>
-                    <div><Button className='jewel-app-btn-create' onClick={() => {viewPage();func("")}}>Create</Button></div>
+                    <div className='jewel-viewpage-header'> <MdOutlineArrowBackIosNew color='red' onClick={() => navigate("/")} /> <span>List of Category</span></div>
+                    <div>
+                        <Button className='jewel-app-btn-create' onClick={() => { viewPage(); func("") }}>Add Category</Button></div>
                 </div>
-                <DataTable cols={React.useMemo(() => [...tableConstant()], [])} data={getAllCategory} isDark bordered striped hoverable rowsPerPage={5} editRow={handleChange} deleteRow={_deleteCategory}/>
+                <DataTable cols={React.useMemo(() => [...tableConstant()], [])} data={getAllCategory} isDark bordered striped hoverable rowsPerPage={5} editRow={handleChange} deleteRow={_deleteCategory} />
             </div>
         </div>
     )

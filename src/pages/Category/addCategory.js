@@ -172,7 +172,7 @@ const AddCategory = ({ toEdit, createPage }) => {
             <div className='jewel-view-container-inner'>
                 <div className='jewel-view-container-inner-align'>
                     <div className='jewel-viewpage-header' onClick={() => createPage()}>
-                        <MdOutlineArrowBackIosNew /> <span> {toEdit !== "" ? 'Edit Category' : 'Create Category'}</span>
+                        <MdOutlineArrowBackIosNew color='red'/> <span> {toEdit !== "" ? 'Edit Category' : 'Create Category'}</span>
                     </div>
 
                 </div>

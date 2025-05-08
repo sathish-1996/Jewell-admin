@@ -277,7 +277,7 @@ const AddSubCategory = ({ toEdit, createPage }) => {
                <div className='jewel-view-container-inner'>
                     <div className='jewel-view-container-inner-align'>
                          <div className='jewel-viewpage-header' onClick={() => createPage()}>
-                              <MdOutlineArrowBackIosNew /> <span> {toEdit !=="" ? 'Edit SubCategory' : 'Create SubCategory'}</span>
+                              <MdOutlineArrowBackIosNew color='red'/> <span> {toEdit !=="" ? 'Edit SubCategory' : 'Create SubCategory'}</span>
                          </div>
 
                     </div>
@@ -346,7 +346,7 @@ const AddSubCategory = ({ toEdit, createPage }) => {
 
                                    </div>
                                    <div className='col-md-5 jewel-view-button-align'>
-                                        <Button className='btn btn-primary' onClick={_createCategory}>{toEdit !=="" ? 'Update' : 'Create'}</Button>
+                                        <Button className='jewel-app-btn-create' onClick={_createCategory}>{toEdit !=="" ? 'Update' : 'Create'}</Button>
                                         <Button className='btn btn-danger' onClick={_resetData}>Cancel</Button>
                                    </div>
                          </div>

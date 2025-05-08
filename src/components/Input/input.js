@@ -12,7 +12,7 @@ const Validation_Regex = {
     RESTRICTED3: /^[A-Z0-9_-]*$/gi,
 };
 
-const InputField = ({ value, label, placeholder, type,inputType,maxlength,avoidSplChar = false, onChange, icon, name, height, width, keyname, important = false, index = '' }) => {
+const InputField = ({ value, label, placeholder, type, inputType, maxlength, avoidSplChar = false, onChange, icon, name, height, width, keyname, important = false, index = '' }) => {
     const [errorValue, setErrorValue] = React.useState(false);
 
     const _handleOnChange = (e) => {
@@ -94,8 +94,9 @@ const InputField = ({ value, label, placeholder, type,inputType,maxlength,avoidS
         }
     };
     return (
-        <div className="form-group">
-            {label && <label htmlFor="input-field">{label} {important && <span className='important-field'>*</span>}{' '}</label>}
+        <>
+            <div className="form-group">
+                {label && <label htmlFor="input-field">{label} {important && <span className='important-field'>*</span>}{' '}</label>}
             <div className="form-input">
                 <input
                     width={width}
@@ -105,14 +106,15 @@ const InputField = ({ value, label, placeholder, type,inputType,maxlength,avoidS
                     type={type}
                     value={value}
                     class={icon}
-                    className="form-control"
+                    // className="form-control"
                     placeholder={placeholder}
                     onChange={_handleOnChange}
                     style={{ height: height }}
                     maxlength={maxlength}
                 />
             </div>
-        </div>
+        </div >
+        </>
     );
 };
 

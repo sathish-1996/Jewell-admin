@@ -31,7 +31,7 @@ const SelectInputField = ({
      const customStyles = {
           option: (provided, state) => ({
                ...provided,
-               fontFamily: state.isSelected ? 'Poppins-Medium' : 'Poppins-Medium',
+               fontFamily: state.isSelected ? 'Poppins' : 'Poppins',
                fontSize: '12px',
                background: state.isFocused ? '#1167b2' : '#fff',
                color: state.isFocused ? '#fff' : '#000'
