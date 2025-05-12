@@ -7,7 +7,7 @@ import { IoChevronBackCircleOutline, IoChevronForwardCircleOutline } from "react
 import GlobalFilter from "../GlobalFilter/globalFilter";
 import { BiSolidEdit, BiSolidEditAlt } from "react-icons/bi";
 import { RiDeleteBin6Line } from "react-icons/ri";
-const DataTable = ({ cols, data, bordered, rowsPerPage = 5, editRow, deleteRow }) => {
+const   DataTable = ({ cols, data, bordered, rowsPerPage = 5, editRow, deleteRow }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [activeBtn, setActiveBtn] = useState({ active: true, inActive: false });

@@ -284,7 +284,21 @@ code {
   margin-left: 20px;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 360px) and (max-width: 640px) {
+  .card-deisgn-outer{
+
+    display: grid !important;
+ 
+    grid-template-columns: auto !important
+
+}
+}
+@media (min-width: 768px)and (max-width: 1024px){
+
+  .col-md-4 {
+    flex: 0 0 auto;
+    width: 5  0% !important;
+}
   .jewel-view-container-inner {
     padding: 10px;
   }
@@ -301,4 +315,35 @@ code {
   .flex-jewe-container-item .border {
     width: 100% !important;
   }
+  
+  .card-deisgn-outer{
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0 1px 4px #00000029;
+    cursor: pointer;
+    display: grid !important;
+    justify-content: space-between;
+    grid-template-columns: auto auto !important;
+
+}
+}
+
+@media (max-width: 640px) {
+  .jewell-header-icon-font-header {
+    font-size: 8px !important;
+   
+}
+.jewell-header-icon-font {
+  font-size: 6px !important;
+  font-weight: 100;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+}
+
+.jewell-header-icon-font-header-1 {
+  font-size: 6px !important;
+  font-weight: 550;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+}
 }

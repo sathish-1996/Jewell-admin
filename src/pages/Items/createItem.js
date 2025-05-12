@@ -76,6 +76,7 @@ const AddItems = ({ toEdit, createPage }) => {
         subCategoryName: '',
         itemName: '',
         itemCode: '',
+        uploadImage: ''
     };
 
     const [errorForm, setErrorForm] = React.useState(initialState);
@@ -85,7 +86,8 @@ const AddItems = ({ toEdit, createPage }) => {
     const _createItems = async () => {
 
         let validate = Validate();
-        const imageChanged = uploadIma && uploadIma !== toEdit?.images?.url;
+        const imageChanged = uploadIma && uploadIma !== toEdit?.imagesUrls;
+        console.log(uploadIma, toEdit?.imagesUrls, imageChanged, "imageChanged`")
         let response;
         if (toEdit === '' && validate === true) {
 
@@ -200,6 +202,7 @@ const AddItems = ({ toEdit, createPage }) => {
         let subCategoryName = '';
         let itemName = '';
         let itemCode = '';
+        let uploadImage = ''
         var regex = /^[a-zA-Z ]*$/;
         var regexNum = /^[A-Za-z0-9_ ]*$/;
 
@@ -226,13 +229,15 @@ const AddItems = ({ toEdit, createPage }) => {
         } else if (!selectField['subCategoryName'] === undefined) {
             subCategoryName = 'Please select Category name';
         }
-
-        if (subCategoryName !== '' || itemName !== '' || itemCode !== '') {
-            setErrorForm({ subCategoryName, itemName, itemCode });
+        if (!uploadIma) {
+            uploadImage = 'Please Upload Image';
+        }
+        if (subCategoryName !== '' || itemName !== '' || itemCode !== '' ||  uploadImage !=='') {
+            setErrorForm({ subCategoryName, itemName, itemCode,uploadImage });
             setTyping(true);
             return false;
         }
-        if (subCategoryName === '' || itemName === '' || itemCode === '') return true;
+        if (subCategoryName === '' && itemName === '' && itemCode === '' && uploadImage === '') return true;
     };
 
     const _resetData = () => {
@@ -357,7 +362,7 @@ const AddItems = ({ toEdit, createPage }) => {
             <div className='jewel-view-container-inner'>
                 <div className='jewel-view-container-inner-align'>
                     <div className='jewel-viewpage-header' onClick={() => createPage()}>
-                        <MdOutlineArrowBackIosNew color='red'/> <span> Create Items</span>
+                        <MdOutlineArrowBackIosNew color='red' /> <span> Create Items</span>
                     </div>
 
                 </div>
@@ -448,7 +453,7 @@ const AddItems = ({ toEdit, createPage }) => {
                                                                 />
                                                                 {toEdit !== "" && (
                                                                     <div onClick={() => setEditimage(index)} className='flex flex-col justify-center items-center'>
-                                                                        <MdOutlineEditLocationAlt  size={20} />
+                                                                        <MdOutlineEditLocationAlt size={20} />
                                                                     </div>
                                                                 )}
                                                             </div>
@@ -457,7 +462,7 @@ const AddItems = ({ toEdit, createPage }) => {
                                                 ) : (
                                                     <div className="flex flex-col items-center text-gray-500">
                                                         <FaCloudUploadAlt size={40} />
-                                                        <span className="text-sm" style={{ marginLeft: "10px" }}>Upload</span>
+                                                        <span className="text-sm" style={{ marginLeft: "10px" }}>{typing ? <div className='hr-error-text'>{errorForm.uploadImage}</div> : "upload"}</span>
                                                     </div>
                                                 )}
                                             </div>
@@ -487,7 +492,7 @@ const AddItems = ({ toEdit, createPage }) => {
 
                         </div>
                         <div className='col-md-6 jewel-view-button-align'>
-                            <Button className='jewel-app-btn-create' style={{ backgroundColor: "#6f86d6" }} onClick={_createItems}>Create</Button>
+                            <Button className='jewel-app-btn-create' style={{ backgroundColor: "#6f86d6" }} onClick={_createItems}>{toEdit !== "" ? 'Update' : 'Create'}</Button>
                             <Button className='btn btn-danger' onClick={_resetData}>Cancel</Button>
                         </div>
                     </div>

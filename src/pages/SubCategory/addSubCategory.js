@@ -7,7 +7,7 @@ import { FaCloudUploadAlt } from 'react-icons/fa'
 import { CREATE_SUBCATEGORY, GETALL_CATEGORY, GETALL_SUBCATEGORY, UPDATE_SUBCATEGORY, UPDATE_SUBCATEGORY_IMAGE } from '../../services/ApiService'
 import toast from 'react-hot-toast';
 const AddSubCategory = ({ toEdit, createPage }) => {
-   
+
      const [selectField, setSelectField] = React.useState({
           categoryName: '',
           subCategoryName: '',
@@ -62,6 +62,7 @@ const AddSubCategory = ({ toEdit, createPage }) => {
           categoryName: '',
           subCategoryName: '',
           subCategoryCode: '',
+            uploadImage:''
      };
 
      const [errorForm, setErrorForm] = React.useState(initialState);
@@ -108,33 +109,33 @@ const AddSubCategory = ({ toEdit, createPage }) => {
                     toast.error(error.message);
                }
           } else if (imageChanged) {
-          
-                      try {
-                          response = await UPDATE_SUBCATEGORY_IMAGE({
-                              by: "subcategory",
-                              id: toEdit.id,
-                              image: uploadIma
-          
-                          });
-          
-                          if (response.success === true) {
-                              createPage();
-                              toast.success(response.message);
-                          } else {
-                              toast.error(response.message);
-                          }
-                      } catch (error) {
-                          toast.error(error.message);
-                      }
-                  }
-           else  {
+
+               try {
+                    response = await UPDATE_SUBCATEGORY_IMAGE({
+                         by: "subcategory",
+                         id: toEdit.id,
+                         image: uploadIma
+
+                    });
+
+                    if (response.success === true) {
+                         createPage();
+                         toast.success(response.message);
+                    } else {
+                         toast.error(response.message);
+                    }
+               } catch (error) {
+                    toast.error(error.message);
+               }
+          }
+          else {
 
                try {
                     response = await UPDATE_SUBCATEGORY({
                          ...selectdata,
                          code: toEdit.code,
                          // categoryName:selectField["categoryName"]
-                       
+
                     });
 
                     if (response.success === true) {
@@ -154,6 +155,7 @@ const AddSubCategory = ({ toEdit, createPage }) => {
           let categoryName = '';
           let subCategoryName = '';
           let subCategoryCode = '';
+          let uploadImage = '';
           var regex = /^[a-zA-Z ]*$/;
           var regexNum = /^[A-Za-z0-9_ ]*$/;
 
@@ -180,13 +182,15 @@ const AddSubCategory = ({ toEdit, createPage }) => {
           } else if (!selectField['categoryName'] === undefined) {
                categoryName = 'Please select Category name';
           }
-
-          if (categoryName !== '' || subCategoryName !== '' || subCategoryCode !== '') {
-               setErrorForm({ categoryName, subCategoryName, subCategoryCode });
+          if (!uploadIma) {
+               uploadImage = 'Please Upload Image';
+          }
+          if (categoryName !== '' || subCategoryName !== '' || subCategoryCode !== '' || uploadImage !== '') {
+               setErrorForm({ categoryName, subCategoryName, subCategoryCode, uploadImage });
                setTyping(true);
                return false;
           }
-          if (categoryName === '' || subCategoryName === '' || subCategoryCode === '') return true;
+          if (categoryName === '' || subCategoryName === '' || subCategoryCode === '' || uploadImage === '') return true;
      };
 
      const _resetData = () => {
@@ -210,8 +214,8 @@ const AddSubCategory = ({ toEdit, createPage }) => {
           } else {
                setSelectData({
                     ...selectdata,
-                    name:"", 
-                    code:""
+                    name: "",
+                    code: ""
                });
                setUploadIma("")
                setSelectField({
@@ -224,6 +228,7 @@ const AddSubCategory = ({ toEdit, createPage }) => {
                     categoryName: '',
                     subCategoryName: '',
                     subCategoryCode: '',
+                    uploadImage:''
                });
           }
      };
@@ -277,7 +282,7 @@ const AddSubCategory = ({ toEdit, createPage }) => {
                <div className='jewel-view-container-inner'>
                     <div className='jewel-view-container-inner-align'>
                          <div className='jewel-viewpage-header' onClick={() => createPage()}>
-                              <MdOutlineArrowBackIosNew color='red'/> <span> {toEdit !=="" ? 'Edit SubCategory' : 'Create SubCategory'}</span>
+                              <MdOutlineArrowBackIosNew color='red' /> <span> {toEdit !== "" ? 'Edit SubCategory' : 'Create SubCategory'}</span>
                          </div>
 
                     </div>
@@ -319,7 +324,7 @@ const AddSubCategory = ({ toEdit, createPage }) => {
                                                             ) : (
                                                                  <div className="flex flex-col items-center text-gray-500">
                                                                       <FaCloudUploadAlt size={40} />
-                                                                      <span className="text-sm" style={{ marginLeft: "10px" }}>upload</span>
+                                                                      <span className="text-sm" style={{ marginLeft: "10px" }}>{typing ? <div className='hr-error-text'>{errorForm.uploadImage}</div> : "upload"}</span>
                                                                  </div>
                                                             )}
                                                        </div>
@@ -342,13 +347,13 @@ const AddSubCategory = ({ toEdit, createPage }) => {
 
                          </div>
                          <div className='row'>
-                                   <div className='col-md-5 jewel-view-button-col-align'>
+                              <div className='col-md-5 jewel-view-button-col-align'>
 
-                                   </div>
-                                   <div className='col-md-5 jewel-view-button-align'>
-                                        <Button className='jewel-app-btn-create' onClick={_createCategory}>{toEdit !=="" ? 'Update' : 'Create'}</Button>
-                                        <Button className='btn btn-danger' onClick={_resetData}>Cancel</Button>
-                                   </div>
+                              </div>
+                              <div className='col-md-5 jewel-view-button-align'>
+                                   <Button className='jewel-app-btn-create' onClick={_createCategory}>{toEdit !== "" ? 'Update' : 'Create'}</Button>
+                                   <Button className='btn btn-danger' onClick={_resetData}>Cancel</Button>
+                              </div>
                          </div>
                     </div>
                </div>

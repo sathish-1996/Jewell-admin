@@ -14,6 +14,7 @@ const AddCategory = ({ toEdit, createPage }) => {
     const initialState = {
         categoryName: '',
         categoryCode: '',
+        uploadImage:''
     };
 
     const [errorForm, setErrorForm] = React.useState(initialState);
@@ -46,6 +47,7 @@ const AddCategory = ({ toEdit, createPage }) => {
     };
     const _createCategory = async () => {
         let validate = Validate();
+        console.log(validate,"data sbs")
         let response;
         const imageChanged = uploadIma && uploadIma !== toEdit?.images?.url;
 
@@ -55,13 +57,14 @@ const AddCategory = ({ toEdit, createPage }) => {
 
                 response = await CREATE_CATEGORY({
                     ...category,
+                    image:uploadIma
 
 
                 });
 
                 if (response.success === true) {
                     createPage(response.response);
-                    toast.success(response.response.message);
+                    toast.success(response.message);
                 } else {
 
                     toast.error(response.response.message);
@@ -88,7 +91,7 @@ const AddCategory = ({ toEdit, createPage }) => {
             } catch (error) {
                 toast.error(error.message);
             }
-        } else {
+        } else if (toEdit !== '') {
 
             try {
                 response = await UPDATE_CATEGORY({
@@ -113,6 +116,7 @@ const AddCategory = ({ toEdit, createPage }) => {
     const Validate = () => {
         let categoryName = '';
         let categoryCode = '';
+          let uploadImage = '';
         var regex = /^[a-zA-Z ]*$/;
         var regexNum = /^[A-Za-z0-9_ ]*$/;
 
@@ -132,14 +136,19 @@ const AddCategory = ({ toEdit, createPage }) => {
         } else if (regexNum.test(category['code'])) {
             categoryCode = '';
         }
+         if (!uploadIma) {
+            uploadImage = 'Please Upload Image';
+        } 
 
-        if (categoryName !== '' || categoryCode !== '') {
-            setErrorForm({ categoryName, categoryCode });
+        if (categoryName !== '' || categoryCode !== '' || uploadImage !=='') {
+           
+            setErrorForm({ categoryName, categoryCode,uploadImage });
             setTyping(true);
             return false;
         }
-        if (categoryName === '' && categoryCode === '') return true;
+        if (categoryName === '' && categoryCode === '' && uploadImage === '') return true;
     };
+  
     const _resetData = () => {
         if (toEdit !== "") {
             setCategory({
@@ -154,7 +163,7 @@ const AddCategory = ({ toEdit, createPage }) => {
                 code: "",
             });
             setUploadIma("")
-            setErrorForm({ categoryName: '', categoryCode: '' });
+            setErrorForm({ categoryName: '', categoryCode: '',uploadImage:'' });
         }
 
     };
@@ -207,12 +216,13 @@ const AddCategory = ({ toEdit, createPage }) => {
 
 
                                                     />
+                                                    
                                                     {uploadIma || toEdit ? (
                                                         <img src={uploadIma} alt="Uploaded" className="w-full h-full object-cover rounded-lg" style={{ maxHeight: "200px", objectFit: "cover" }} />
                                                     ) : (
                                                         <div className="flex flex-col items-center text-gray-500">
                                                             <FaCloudUploadAlt size={40} />
-                                                            <span className="text-sm" style={{ marginLeft: "10px" }}>upload</span>
+                                                            <span className="text-sm" style={{ marginLeft: "10px" }}>{typing ? <div className='hr-error-text'>{errorForm.uploadImage}</div> : "upload"}</span>
                                                         </div>
                                                     )}
                                                 </div>
@@ -228,7 +238,7 @@ const AddCategory = ({ toEdit, createPage }) => {
                                     }
 
                                 </div>
-
+ 
                             </div>
                         </div>
 

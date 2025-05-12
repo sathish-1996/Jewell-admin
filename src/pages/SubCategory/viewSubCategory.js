@@ -46,6 +46,7 @@ const ViewSubCategory = ({ viewPage,func }) => {
     }
 
         const _deleteCategory = async (data) => {
+            console.log(data,"data")
              
             let response;
     
