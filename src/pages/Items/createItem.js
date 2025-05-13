@@ -126,7 +126,7 @@ const AddItems = ({ toEdit, createPage }) => {
                 if (response.success === true) {
                     createPage();
                     toast.success(response.message);
-                } else {
+                } else if (toEdit !== "") {
                     toast.error(response.message);
                 }
             } catch (error) {
@@ -232,8 +232,8 @@ const AddItems = ({ toEdit, createPage }) => {
         if (!uploadIma) {
             uploadImage = 'Please Upload Image';
         }
-        if (subCategoryName !== '' || itemName !== '' || itemCode !== '' ||  uploadImage !=='') {
-            setErrorForm({ subCategoryName, itemName, itemCode,uploadImage });
+        if (subCategoryName !== '' || itemName !== '' || itemCode !== '' || uploadImage !== '') {
+            setErrorForm({ subCategoryName, itemName, itemCode, uploadImage });
             setTyping(true);
             return false;
         }

@@ -62,7 +62,7 @@ const AddSubCategory = ({ toEdit, createPage }) => {
           categoryName: '',
           subCategoryName: '',
           subCategoryCode: '',
-            uploadImage:''
+          uploadImage: ''
      };
 
      const [errorForm, setErrorForm] = React.useState(initialState);
@@ -128,7 +128,7 @@ const AddSubCategory = ({ toEdit, createPage }) => {
                     toast.error(error.message);
                }
           }
-          else {
+          else if (toEdit !== "") {
 
                try {
                     response = await UPDATE_SUBCATEGORY({
@@ -228,7 +228,7 @@ const AddSubCategory = ({ toEdit, createPage }) => {
                     categoryName: '',
                     subCategoryName: '',
                     subCategoryCode: '',
-                    uploadImage:''
+                    uploadImage: ''
                });
           }
      };
