@@ -15,7 +15,7 @@ const Card = () => {
     img: "https://images.pexels.com/photos/248077/pexels-photo-248077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
   {
-    name: "Sub-category", icon: <TbCategoryPlus size={'25px'} />, count: "02", path: "SubCategory", img: "https://images.pexels.com/photos/17834/pexels-photo.jpg",
+    name: "Sub-Category", icon: <TbCategoryPlus size={'25px'} />, count: "02", path: "SubCategory", img: "https://images.pexels.com/photos/17834/pexels-photo.jpg",
   }, {
     name: "Items", img: "", icon: <LiaSitemapSolid size={'25px'} />, count: "03", path: "/items", img: "https://images.pexels.com/photos/6929216/pexels-photo-6929216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   }]
