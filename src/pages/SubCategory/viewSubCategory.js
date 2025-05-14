@@ -69,7 +69,7 @@ const ViewSubCategory = ({ viewPage,func }) => {
         <div className='jewel-view-container'>
             <div className='jewel-view-container-inner'>
                 <div className='jewel-view-container-inner-align'>
-                    <div className='jewel-viewpage-header'> <MdOutlineArrowBackIosNew color='red' onClick={() => navigate("/")} /> <span>List of Sub-category</span></div>
+                    <div className='jewel-viewpage-header'> <MdOutlineArrowBackIosNew color='#07183b' onClick={() => navigate("/")} /> <span>List of Sub-category</span></div>
                     <div><Button className="jewel-app-btn-create" onClick={() => {viewPage(); func("")}}>Add Sub-Category</Button></div>
                 </div>
                 <DataTable cols={React.useMemo(() => [...SubCategoryFields()], [])}  data={getAllSubCategory} isDark bordered striped hoverable rowsPerPage={5} editRow={handleChange} deleteRow={_deleteCategory}/>

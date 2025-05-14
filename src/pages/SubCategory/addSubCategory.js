@@ -282,7 +282,7 @@ const AddSubCategory = ({ toEdit, createPage }) => {
                <div className='jewel-view-container-inner'>
                     <div className='jewel-view-container-inner-align'>
                          <div className='jewel-viewpage-header' onClick={() => createPage()}>
-                              <MdOutlineArrowBackIosNew color='red' /> <span> {toEdit !== "" ? 'Edit SubCategory' : 'Create SubCategory'}</span>
+                              <MdOutlineArrowBackIosNew color='#07183b' /> <span> {toEdit !== "" ? 'Edit SubCategory' : 'Create SubCategory'}</span>
                          </div>
 
                     </div>

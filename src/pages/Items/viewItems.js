@@ -70,7 +70,7 @@ const ViewItems = ({ func, viewPage }) => {
         <div className='jewel-view-container'>
             <div className='jewel-view-container-inner'>
                 <div className='jewel-view-container-inner-align'>
-                    <div className='jewel-viewpage-header'> <MdOutlineArrowBackIosNew color='red' onClick={() => navigate("/")} /> <span>List of Items</span></div>
+                    <div className='jewel-viewpage-header'> <MdOutlineArrowBackIosNew color='#07183b' onClick={() => navigate("/")} /> <span>List of Items</span></div>
                     <div><Button className="jewel-app-btn-create" onClick={() => { viewPage(); func("") }}>Add Items</Button></div>
                 </div>
                 <DataTable cols={React.useMemo(() => [...ItemsFileds()], [])} data={getAllItems} isDark bordered striped hoverable rowsPerPage={5} editRow={handleChange} deleteRow={_deleteCategory} />

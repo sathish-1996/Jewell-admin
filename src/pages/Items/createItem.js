@@ -362,7 +362,7 @@ const AddItems = ({ toEdit, createPage }) => {
             <div className='jewel-view-container-inner'>
                 <div className='jewel-view-container-inner-align'>
                     <div className='jewel-viewpage-header' onClick={() => createPage()}>
-                        <MdOutlineArrowBackIosNew color='red' /> <span> Create Items</span>
+                        <MdOutlineArrowBackIosNew color='#07183b' /> <span> Create Items</span>
                     </div>
 
                 </div>
