@@ -53,7 +53,9 @@ const ViewSubCategory = ({ viewPage,func }) => {
             try {
                  response = await DELETE_SUBCATEGORY(data.code);
                  if (response.success === true) {
-                      
+                        setGetAllSubCategory(prev =>
+                    prev.filter(category => category.code !== data.code)
+                );
                       toast.success(response.message);
                  } else {
                       toast.error(response.message);

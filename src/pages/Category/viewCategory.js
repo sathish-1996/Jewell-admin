@@ -40,13 +40,15 @@ const ViewCategory = ({ viewPage, func }) => {
     }
 
     const _deleteCategory = async (code) => {
-  console.log(code,"code")
+
         let response;
 
         try {
             response = await DELETE_CATEGORY(code?.code);
             if (response.success === true) {
-
+                setGetAllCategory(prev =>
+                    prev.filter(category => category.code !== code.code)
+                );
                 toast.success(response.message);
             } else {
                 toast.error(response.message);

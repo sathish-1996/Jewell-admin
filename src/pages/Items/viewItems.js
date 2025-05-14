@@ -25,7 +25,7 @@ const ViewItems = ({ func, viewPage }) => {
             let getData = []
             for (let index = 0; index < response.products.length; index++) {
                 const element = response.products[index];
-                
+
                 getData.push({ ...element, SubCategoryName: element.subcategories.name })
 
             }
@@ -54,7 +54,9 @@ const ViewItems = ({ func, viewPage }) => {
         try {
             response = await DELETE_ITEMS(data.id);
             if (response.success === true) {
-
+                setGetAllItems(prev =>
+                    prev.filter(category => category.code !== data.code)
+                );
                 toast.success(response.message);
             } else {
                 toast.error(response.message);
