@@ -12,12 +12,18 @@ const Card = () => {
 
     count: "04",
     path: "/category",
-    img: "https://images.pexels.com/photos/248077/pexels-photo-248077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    img: "https://cdn.pixabay.com/photo/2021/10/11/23/49/app-6702044_1280.png",
   },
   {
-    name: "Sub-category", icon: <TbCategoryPlus size={'25px'} />, count: "02", path: "SubCategory", img: "https://images.pexels.com/photos/17834/pexels-photo.jpg",
+    name: "Sub-category", 
+    icon: <TbCategoryPlus size={'25px'} />, 
+    count: "02", path: "SubCategory", 
+    img: "https://png.pngtree.com/png-vector/20190307/ourmid/pngtree-vector-electron-icon-png-image_781152.jpg",
   }, {
-    name: "Items", img: "", icon: <LiaSitemapSolid size={'25px'} />, count: "03", path: "/items", img: "https://images.pexels.com/photos/6929216/pexels-photo-6929216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    name: "Items", 
+    icon: <LiaSitemapSolid size={'25px'} />, 
+    count: "03", path: "/items", 
+    img: "https://e7.pngegg.com/pngimages/763/532/png-clipart-electronic-engineering-computer-icons-electronics-computer-software-electronic-arts-engineering-black.png",
   }]
   return (
     <div className='card-deisgn-outer' >
